@@ -52,6 +52,10 @@ module.exports = function (grunt) {
         files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['sass:server', 'autoprefixer']
       },
+      babel: {
+        files: ['<%= config.app %>/scripts/{,**/}*.js'],
+        tasks: ['newer:babel:dist']
+      },
       styles: {
         files: ['<%= config.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
@@ -188,6 +192,19 @@ module.exports = function (grunt) {
           dest: '.tmp/styles/'
         }]
       }
+    },
+
+    babel: {
+      options: {
+        sourceMap: true,
+        compact: false
+      },
+      dist: [{
+        expand: true,
+        cwd: '<%= config.app %>/scripts',
+        src: '{,**/}*.js',
+        dest: '.tmp/scripts'
+      }]
     },
 
     // Automatically inject Bower components into the HTML file
@@ -376,7 +393,8 @@ module.exports = function (grunt) {
         'sass',
         'copy:styles',
         'imagemin',
-        'svgmin'
+        'svgmin',
+        'babel'
       ]
     }
   });
