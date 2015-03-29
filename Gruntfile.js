@@ -114,6 +114,13 @@ module.exports = function (grunt) {
       }
     },
 
+    'gh-pages': {
+      options: {
+        base: '<%= config.dist %>'
+      },
+      src: ['**']
+    },
+
     // Empties folders to start fresh
     clean: {
       dist: {
@@ -196,15 +203,18 @@ module.exports = function (grunt) {
 
     babel: {
       options: {
-        sourceMap: true,
-        compact: false
+        compact: false,
+        experimental: true,
+        sourceMap: true
       },
-      dist: [{
-        expand: true,
-        cwd: '<%= config.app %>/scripts',
-        src: '{,**/}*.js',
-        dest: '.tmp/scripts'
-      }]
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= config.app %>/scripts',
+          src: ['{,**/}*.js'],
+          dest: '.tmp/scripts'
+        }]
+      }
     },
 
     // Automatically inject Bower components into the HTML file
@@ -394,7 +404,7 @@ module.exports = function (grunt) {
         'copy:styles',
         'imagemin',
         'svgmin',
-        'babel'
+        'babel:dist'
       ]
     }
   });
@@ -452,6 +462,11 @@ module.exports = function (grunt) {
     'rev',
     'usemin',
     'htmlmin'
+  ]);
+
+  grunt.registerTask('deploy', [
+    'build',
+    'gh-pages'
   ]);
 
   grunt.registerTask('default', [
