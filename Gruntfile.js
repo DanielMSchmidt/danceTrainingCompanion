@@ -30,10 +30,6 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
-      bower: {
-        files: ['bower.json'],
-        tasks: ['wiredep']
-      },
       js: {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
         tasks: ['jshint'],
@@ -205,7 +201,8 @@ module.exports = function (grunt) {
       options: {
         compact: false,
         experimental: true,
-        sourceMap: true
+        sourceMap: true,
+        modules: 'amd'
       },
       dist: {
         files: [{
@@ -214,19 +211,6 @@ module.exports = function (grunt) {
           src: ['{,**/}*.js'],
           dest: '.tmp/scripts'
         }]
-      }
-    },
-
-    // Automatically inject Bower components into the HTML file
-    wiredep: {
-      app: {
-        ignorePath: /^\/|\.\.\//,
-        src: ['<%= config.app %>/index.html'],
-        exclude: ['bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js']
-      },
-      sass: {
-        src: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
-        ignorePath: /(\.\.\/){1,2}bower_components\//
       }
     },
 
@@ -394,7 +378,8 @@ module.exports = function (grunt) {
     concurrent: {
       server: [
         'sass:server',
-        'copy:styles'
+        'copy:styles',
+        'babel'
       ],
       test: [
         'copy:styles'
@@ -404,7 +389,7 @@ module.exports = function (grunt) {
         'copy:styles',
         'imagemin',
         'svgmin',
-        'babel:dist'
+        'babel'
       ]
     }
   });
@@ -420,7 +405,6 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'wiredep',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -450,7 +434,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'wiredep',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
