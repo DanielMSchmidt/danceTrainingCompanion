@@ -1,17 +1,10 @@
 # Dance Training Companion
 
-## Vision
+## Development
 
-An offline-first application, which lets you build relationships between one or many of the following:
+- run `npm install & bower install`
+- run `grunt serve` to start development
 
-- dancing instruction
-- danced figure
-- point of time in the choreography
+## Deployment
 
-## Server
-
-Should be done via [postgrest](https://github.com/begriffs/postgrest).
-
-## Frontend
-
-Normal yeoman webapp with React + Backbone
+- run `grunt deploy`
