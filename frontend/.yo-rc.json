@@ -1,12 +1,7 @@
 {
-  "generator-backbone": {
-    "appPath": "app",
-    "appName": "DanceTrainingCompanion",
-    "coffee": false,
-    "testFramework": "mocha",
-    "templateFramework": "lodash",
-    "sassBootstrap": true,
-    "includeRequireJS": true
-  },
-  "generator-mocha": {}
+  "generator-react-webpack": {
+    "app-name": "danceTrainingCompanion",
+    "flux": true,
+    "styles-language": "sass"
+  }
 }
