@@ -48,7 +48,7 @@ module.exports = {
       loader: 'react-hot!babel-loader'
     }, {
       test: /\.sass/,
-      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
     }, {
       test: /\.css$/,
       loader: 'style-loader!css-loader'
