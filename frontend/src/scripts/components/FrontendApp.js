@@ -18,7 +18,7 @@ var FrontendApp = React.createClass({
   render: function() {
     return (
       <div className='main'>
-        <ReactTransitionGroup transitionName="fade">
+        <ReactTransitionGroup transitionName='fade'>
           <RouteHandler />
         </ReactTransitionGroup>
       </div>
