@@ -10,6 +10,8 @@ var RouteHandler = Router.RouteHandler;
 require('normalize.css');
 require('../../styles/main.css');
 require('../../styles/layout.sass');
+require('../../../node_modules/bootstrap/dist/css/bootstrap.css');
+
 
 var imageURL = require('../../images/yeoman.png');
 
