@@ -15,5 +15,25 @@
     <h1>If you can see this, something is broken (or JS is not enabled)!!.</h1>
   </div>
   <script type="text/javascript" src="assets/main.js"></script>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '352511848284958',
+        xfbml      : true, // parse XFBML
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        version    : 'v2.3'
+      });
+    };
+
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
 </body>
 </html>
