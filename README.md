@@ -14,5 +14,5 @@ Should be done via a slim rails api
 
 ## Frontend
 
-- Normal yeoman webapp with React + Backbone (+ Marionette)
-- tests would be really cool
+- Normal yeoman webapp with React + Flux
+  - Flux should be emnbraced soon, first I need to understand it
