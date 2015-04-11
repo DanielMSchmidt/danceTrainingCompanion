@@ -2,7 +2,7 @@
 
 var Constants = {
   LOGGED_IN: 'LOGGED_IN',
-  CHANGE_EVENT: 'CHANGE_EVENT'
+  LOGIN_EVENT: 'LOGIN_EVENT'
 };
 
 module.exports = Constants;

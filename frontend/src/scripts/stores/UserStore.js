@@ -1,15 +1,19 @@
 'use strict';
 
+var Deferred = require('../helpers/Deferred');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var DanceTrainingCompanionAppDispatcher = require('../dispatcher/DanceTrainingCompanionAppDispatcher');
 var Constants = require('../Constants');
+var Api = require('../Api');
+
+var choreoDeferred = new Deferred(),
+    notesDeferred = new Deferred();
 
 var _user = {
-    loggedIn: false,
-    userId: false,
-    choreos: {},
-    notes: {}
+    id: false,
+    choreos: choreoDeferred,
+    notes: notesDeferred
 };
 
 var UserStore = assign({}, EventEmitter.prototype, {
@@ -17,22 +21,32 @@ var UserStore = assign({}, EventEmitter.prototype, {
     return assign({}, _user); // copy dat user
   },
 
-  emitChange: function() {
-    this.emit(Constants.CHANGE_EVENT);
+  isLoggedIn: function() {
+    return !!_user.id;
+  },
+
+  emitLogin: function() {
+    this.emit(Constants.LOGIN_EVENT);
+  },
+
+  loadUser: function(token) {
+    _user.id = token;
+    Api.loadNotesFor(token, _user.notes);
+    Api.loadChoreosFor(token, _user.choreos);
   },
 
   /**
    * @param {function} callback
    */
-  addChangeListener: function(callback) {
-    this.on(Constants.CHANGE_EVENT, callback);
+  addLoginListener: function(callback) {
+    this.on(Constants.LOGIN_EVENT, callback);
   },
 
   /**
    * @param {function} callback
    */
-  removeChangeListener: function(callback) {
-    this.removeListener(Constants.CHANGE_EVENT, callback);
+  removeLoginListener: function(callback) {
+    this.removeListener(Constants.LOGIN_EVENT, callback);
   }
 });
 
@@ -40,10 +54,9 @@ var UserStore = assign({}, EventEmitter.prototype, {
 DanceTrainingCompanionAppDispatcher.register(function(action) {
   switch(action.actionType) {
     case Constants.LOGGED_IN:
-      debugger
+      UserStore.loadUser(action.token);
+      UserStore.emitLogin();
     break;
-
-
 
     default:
       // no op

@@ -1,4 +1,5 @@
 'use strict';
+require('es6-promise').polyfill();
 
 var React = require('react/addons');
 var assign = require('object-assign');
@@ -22,14 +23,17 @@ var FrontendApp = React.createClass({
   },
 
   componentDidMount: function() {
-    UserStore.addChangeListener(this._onChange);
+    UserStore.addLoginListener(this._onLogin);
   },
 
   componentWillUnmount: function() {
-    UserStore.removeChangeListener(this._onChange);
+    UserStore.removeLoginListener(this._onLogin);
   },
-  _onChange: function(payload) {
-    console.info('Something changed I guess: ', payload);
+  _onLogin: function() {
+    console.info('The user logged in, so redirect him');
+    debugger
+    // vvv Use this vvv
+    // https://github.com/rackt/react-router/blob/master/docs/api/Location.md
   },
   mixins: [PureRenderMixin],
   render: function() {

@@ -1,7 +1,29 @@
 'use strict';
 
-var Api = {
+var API_ENDPOINT = '';
 
+var Api = {
+  loadNotesFor: function(token, promise) {
+    if (promise === undefined) {
+      promise = new Promise();
+    }
+    // TODO: make a real api request
+
+    promise.resolve(function() {
+      return {};
+    });
+  },
+
+  loadChoreosFor: function(token, promise) {
+    if (promise === undefined) {
+      promise = new Promise();
+    }
+    // TODO: make a real api request
+
+    promise.resolve(function() {
+      return {};
+    });
+  }
 };
 
 module.exports = Api;

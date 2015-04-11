@@ -2,14 +2,13 @@
 
 var React = require('react/addons');
 var LoginButton = require('components/LoginButton');
-var Api = require('../Api');
 var LoginActionCreators = require('actions/LoginActionCreators');
 
 require('../../styles/LoginScreen.sass');
 
 var LoginScreen = React.createClass({
-  onLogin: function(token) {
-    LoginActionCreators.login(token);
+  onLogin: function(authentication) {
+    LoginActionCreators.login(authentication.authResponse.accessToken);
   },
   render: function () {
     return (
