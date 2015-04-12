@@ -19,12 +19,14 @@ var NotesStore = assign({}, EventEmitter.prototype, {
     return _loadingStarted;
   },
 
-  load: function() {
+  load: function(token) {
     _loadingStarted = true;
 
-    // Later on
-    // _loadingStarted = flase;
-    // Maybe send an action to display we are done
+    Api.loadChoreosFor(token, _notes);
+    _notes.then(function() {
+      _loadingStarted = false;
+      // Maybe send an action to display we are done
+    });
   }
 });
 
