@@ -1,10 +1,12 @@
 'use strict';
 require('es6-promise').polyfill();
 
-var React = require('react/addons');
+var React  = require('react/addons');
 var assign = require('object-assign');
 var Router = require('react-router');
 
+var LoginScreen = require('./LoginScreen');
+var Header      = require('./Header');
 var UserStore   = require('stores/UserStore');
 var ChoreoStore = require('stores/ChoreoStore');
 var NotesStore  = require('stores/NotesStore');
@@ -12,6 +14,7 @@ var NotesStore  = require('stores/NotesStore');
 var ReactTransitionGroup = React.addons.TransitionGroup;
 var PureRenderMixin = React.addons.PureRenderMixin;
 var RouteHandler = Router.RouteHandler;
+var RouteLocation = Router.HashLocation;
 
 // CSS
 require('normalize.css');
@@ -21,7 +24,7 @@ require('../../../node_modules/bootstrap/dist/css/bootstrap.css');
 
 var FrontendApp = React.createClass({
   getInitialState: function() {
-    return {};
+    return {loggedIn: false};
   },
 
   componentDidMount: function() {
@@ -32,15 +35,21 @@ var FrontendApp = React.createClass({
     UserStore.removeLoginListener(this._onLogin);
   },
   _onLogin: function() {
-    console.info('The user logged in, so redirect him');
-    debugger
-    // vvv Use this vvv
-    // https://github.com/rackt/react-router/blob/master/docs/api/Location.md
+    this.setState({loggedIn: true});
   },
   mixins: [PureRenderMixin],
   render: function() {
+    if (!this.state.loggedIn) {
+      return (
+        <div className='main'>
+          <LoginScreen />
+        </div>
+      );
+    }
+
     return (
       <div className='main'>
+        <Header username='Frank Underwood' />
         <ReactTransitionGroup transitionName='fade'>
           <RouteHandler />
         </ReactTransitionGroup>

@@ -1,6 +1,6 @@
 {
   "generator-react-webpack": {
-    "app-name": "danceTrainingCompanion",
+    "app-name": "frontend",
     "flux": true,
     "styles-language": "sass"
   }
