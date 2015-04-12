@@ -7,18 +7,13 @@ var DanceTrainingCompanionAppDispatcher = require('../dispatcher/DanceTrainingCo
 var Constants = require('../Constants');
 var Api = require('../Api');
 
-var choreoDeferred = new Deferred(),
-    notesDeferred = new Deferred();
-
 var _user = {
-    id: false,
-    choreos: choreoDeferred,
-    notes: notesDeferred
+    id: false
 };
 
 var UserStore = assign({}, EventEmitter.prototype, {
-  getState: function() {
-    return assign({}, _user); // copy dat user
+  getUserId: function() {
+    return _user.id;
   },
 
   isLoggedIn: function() {
@@ -29,10 +24,8 @@ var UserStore = assign({}, EventEmitter.prototype, {
     this.emit(Constants.LOGIN_EVENT);
   },
 
-  loadUser: function(token) {
+  load: function(token) {
     _user.id = token;
-    Api.loadNotesFor(token, _user.notes);
-    Api.loadChoreosFor(token, _user.choreos);
   },
 
   /**
@@ -51,10 +44,10 @@ var UserStore = assign({}, EventEmitter.prototype, {
 });
 
 // Register callback to handle all updates
-DanceTrainingCompanionAppDispatcher.register(function(action) {
+UserStore.dispatchToken = DanceTrainingCompanionAppDispatcher.register(function(action) {
   switch(action.actionType) {
     case Constants.LOGGED_IN:
-      UserStore.loadUser(action.token);
+      UserStore.load(action.token);
       UserStore.emitLogin();
     break;
 

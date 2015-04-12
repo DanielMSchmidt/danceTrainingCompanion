@@ -5,7 +5,9 @@ var React = require('react/addons');
 var assign = require('object-assign');
 var Router = require('react-router');
 
-var UserStore = require('stores/UserStore');
+var UserStore   = require('stores/UserStore');
+var ChoreoStore = require('stores/ChoreoStore');
+var NotesStore  = require('stores/NotesStore');
 
 var ReactTransitionGroup = React.addons.TransitionGroup;
 var PureRenderMixin = React.addons.PureRenderMixin;
@@ -19,7 +21,7 @@ require('../../../node_modules/bootstrap/dist/css/bootstrap.css');
 
 var FrontendApp = React.createClass({
   getInitialState: function() {
-    return assign({}, UserStore.getState());
+    return {};
   },
 
   componentDidMount: function() {
