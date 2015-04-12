@@ -22,6 +22,10 @@ require('../../styles/main.css');
 require('../../styles/layout.sass');
 require('../../../node_modules/bootstrap/dist/css/bootstrap.css');
 
+// JS
+window.jQuery = require('../../../node_modules/jquery/dist/jquery.js');
+require('../../../node_modules/bootstrap/js/collapse.js');
+
 var FrontendApp = React.createClass({
   getInitialState: function() {
     return {loggedIn: false};
