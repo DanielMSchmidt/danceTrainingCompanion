@@ -20,7 +20,9 @@ var RouteLocation = Router.HashLocation;
 require('normalize.css');
 require('../../styles/main.css');
 require('../../styles/layout.sass');
-require('../../../node_modules/bootstrap/dist/css/bootstrap.css');
+require('node/bootstrap/dist/css/bootstrap.css');
+require('bower/font-awesome/css/font-awesome.css');
+require('bower/bootstrap-social/bootstrap-social.css');
 
 // JS
 window.jQuery = require('../../../node_modules/jquery/dist/jquery.js');

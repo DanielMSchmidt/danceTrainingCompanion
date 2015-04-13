@@ -38,7 +38,9 @@ module.exports = {
       'styles': '../../../src/styles',
       'components': '../../../src/scripts/components/',
       'stores': '../../../src/scripts/stores/',
-      'actions': '../../../src/scripts/actions/'
+      'actions': '../../../src/scripts/actions/',
+      'node': '../../../node_modules',
+      'bower': '../../../bower_components'
     }
   },
 

@@ -33,7 +33,9 @@ module.exports = {
       'styles': '../../../src/styles',
       'components': '../../../src/scripts/components/',
       'stores': '../../../src/scripts/stores/',
-      'actions': '../../../src/scripts/actions/'
+      'actions': '../../../src/scripts/actions/',
+      'node': '../../../node_modules',
+      'bower': '../../../bower_components'
     }
   },
   module: {
@@ -56,19 +58,19 @@ module.exports = {
       test: /\.(png|jpg)$/,
       loader: 'url-loader?limit=8192'
     }, {
-      test: /\.woff$/,
+      test: /\.woff(\w|\W)*$/,
       loader: "url-loader?limit=10000&minetype=application/font-woff"
     }, {
-      test: /\.woff2$/,
+      test: /\.woff2(\w|\W)*$/,
       loader: "url-loader?limit=10000&minetype=application/font-woff"
     }, {
-      test: /\.ttf$/,
+      test: /\.ttf(\w|\W)*$/,
       loader: "file-loader"
     }, {
-      test: /\.eot$/,
+      test: /\.eot(\w|\W)*$/,
       loader: "file-loader"
     }, {
-      test: /\.svg$/,
+      test: /\.svg(\w|\W)*$/,
       loader: "file-loader"
     }]
   },
