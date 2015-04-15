@@ -60,10 +60,25 @@ module.exports = {
       loader: 'style-loader!css-loader'
     }, {
       test: /\.sass/,
-      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
     }, {
       test: /\.(png|jpg)$/,
       loader: 'url-loader?limit=8192'
+    }, {
+      test: /\.woff(\w|\W)*$/,
+      loader: "url-loader?limit=10000&minetype=application/font-woff"
+    }, {
+      test: /\.woff2(\w|\W)*$/,
+      loader: "url-loader?limit=10000&minetype=application/font-woff"
+    }, {
+      test: /\.ttf(\w|\W)*$/,
+      loader: "file-loader"
+    }, {
+      test: /\.eot(\w|\W)*$/,
+      loader: "file-loader"
+    }, {
+      test: /\.svg(\w|\W)*$/,
+      loader: "file-loader"
     }]
   }
 };
