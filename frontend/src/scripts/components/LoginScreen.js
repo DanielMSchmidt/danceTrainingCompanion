@@ -8,7 +8,7 @@ require('../../styles/LoginScreen.sass');
 
 var LoginScreen = React.createClass({
   onLogin: function(authentication) {
-    LoginActionCreators.login(authentication.authResponse.accessToken);
+    LoginActionCreators.login(authentication.authResponse);
   },
   render: function () {
     return (

@@ -30,7 +30,7 @@ require('../../../node_modules/bootstrap/js/collapse.js');
 
 var FrontendApp = React.createClass({
   getInitialState: function() {
-    return {loggedIn: false};
+    return {loggedIn: UserStore.isLoggedIn()};
   },
 
   componentDidMount: function() {

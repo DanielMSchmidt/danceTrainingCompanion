@@ -4,10 +4,11 @@ var Dispatcher = require('../dispatcher/DanceTrainingCompanionAppDispatcher');
 var Constants = require('../Constants');
 
 var LoginActionCreators = {
-  login: function(token) {
+  login: function(authResponse) {
     Dispatcher.dispatch({
       actionType: Constants.LOGGED_IN,
-      token: token
+      userID: authResponse.userID,
+      accessToken: authResponse.accessToken
     });
   },
 };
