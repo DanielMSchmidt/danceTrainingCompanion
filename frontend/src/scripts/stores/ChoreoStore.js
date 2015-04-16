@@ -12,6 +12,9 @@ var _choreos = new Deferred(),
 
 var ChoreoStore = assign({}, EventEmitter.prototype, {
   getChoreos: function() {
+    if (!_loadingStarted) {
+      ChoreoStore.load();
+    }
     return _choreos.promise;
   },
 
@@ -19,14 +22,28 @@ var ChoreoStore = assign({}, EventEmitter.prototype, {
     return _loadingStarted;
   },
 
-  load: function(token) {
+  load: function() {
     _loadingStarted = true;
 
-    Api.loadChoreosFor(token, _choreos);
-    _choreos.then(function() {
+    Api.loadChoreosFor('get the real token from that other store', _choreos);
+    _choreos.promise.then(function() {
       _loadingStarted = false;
       // Maybe send an action to display we are done
     });
+  },
+
+  /**
+   * @param {function} callback
+   */
+  addChangeListener: function(callback) {
+    this.on(Constants.CHOREO_CHANGE_EVENT, callback);
+  },
+
+  /**
+   * @param {function} callback
+   */
+  removeChangeListener: function(callback) {
+    this.removeListener(Constants.CHOREO_CHANGE_EVENT, callback);
   }
 });
 
@@ -34,7 +51,7 @@ var ChoreoStore = assign({}, EventEmitter.prototype, {
 ChoreoStore.dispatchToken = DanceTrainingCompanionAppDispatcher.register(function(action) {
   switch(action.actionType) {
     case Constants.LOGGED_IN:
-      ChoreoStore.load(action.token);
+      ChoreoStore.load();
     break;
 
     default:

@@ -20,9 +20,10 @@ var Api = {
     }
     // TODO: make a real api request
 
-    promise.resolve(function() {
-      return {};
-    });
+    promise.resolve([{
+      name: 'Samba',
+      content: []
+    }]);
   }
 };
 
