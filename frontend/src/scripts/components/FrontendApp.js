@@ -56,9 +56,11 @@ var FrontendApp = React.createClass({
     return (
       <div className='main'>
         <Header username='Frank Underwood' />
-        <ReactTransitionGroup transitionName='fade'>
-          <RouteHandler />
-        </ReactTransitionGroup>
+        <div className='navbar-spaced container'>
+          <ReactTransitionGroup transitionName='fade'>
+            <RouteHandler />
+          </ReactTransitionGroup>
+        </div>
       </div>
     );
   }
