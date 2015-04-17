@@ -12,7 +12,6 @@ var ChoreoStore = require('stores/ChoreoStore');
 var NotesStore  = require('stores/NotesStore');
 
 var ReactTransitionGroup = React.addons.TransitionGroup;
-var PureRenderMixin = React.addons.PureRenderMixin;
 var RouteHandler = Router.RouteHandler;
 var RouteLocation = Router.HashLocation;
 
@@ -43,7 +42,6 @@ var FrontendApp = React.createClass({
   _onLogin: function() {
     this.setState({loggedIn: true});
   },
-  mixins: [PureRenderMixin],
   render: function() {
     if (!this.state.loggedIn) {
       return (

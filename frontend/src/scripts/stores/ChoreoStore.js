@@ -11,6 +11,18 @@ var _choreos = new Deferred(),
     _loadingStarted = false;
 
 var ChoreoStore = assign({}, EventEmitter.prototype, {
+  add: function(choreo) {
+    // Adds a new choreography
+    // only add after loading is done
+    _choreos.promise.then((oldChoreos) => {
+      var newChoreos = oldChoreos;
+      newChoreos.push(choreo);
+      _choreos = new Deferred();
+      _choreos.resolve(newChoreos);
+      this.emitChange();
+    });
+  },
+
   getChoreos: function() {
     if (!_loadingStarted) {
       ChoreoStore.load();
@@ -27,9 +39,12 @@ var ChoreoStore = assign({}, EventEmitter.prototype, {
 
     Api.loadChoreosFor('get the real token from that other store', _choreos);
     _choreos.promise.then(function() {
-      _loadingStarted = false;
       // Maybe send an action to display we are done
     });
+  },
+
+  emitChange: function() {
+    this.emit(Constants.CHOREO_CHANGE_EVENT);
   },
 
   /**

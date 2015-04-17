@@ -16,9 +16,7 @@ var Choreos = React.createClass({
 
   componentDidMount: function() {
     ChoreoStore.addChangeListener(this._onChange);
-    ChoreoStore.getChoreos().then((res) => {
-      this.setState({items: res});
-    });
+    this.loadChoreos();
   },
 
   componentWillUnmount: function() {
@@ -26,7 +24,14 @@ var Choreos = React.createClass({
   },
 
   _onChange: function() {
-    debugger;
+    this.loadChoreos();
+  },
+
+  loadChoreos: function() {
+    ChoreoStore.getChoreos().then((res) => {
+      // TODO: moved to props somehow?
+      this.setState({items: res});
+    });
   },
 
   render: function () {
