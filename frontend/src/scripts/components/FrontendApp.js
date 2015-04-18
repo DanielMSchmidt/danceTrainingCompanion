@@ -29,7 +29,13 @@ require('../../../node_modules/bootstrap/js/collapse.js');
 
 var FrontendApp = React.createClass({
   getInitialState: function() {
-    return {loggedIn: UserStore.isLoggedIn()};
+    return {
+      loggedIn: UserStore.isLoggedIn(),
+      username: {
+        first: UserStore.getUser().firstName,
+        last: UserStore.getUser().lastName
+      }
+    };
   },
 
   componentDidMount: function() {
@@ -39,9 +45,17 @@ var FrontendApp = React.createClass({
   componentWillUnmount: function() {
     UserStore.removeLoginListener(this._onLogin);
   },
+
   _onLogin: function() {
-    this.setState({loggedIn: true});
+    this.setState({
+      loggedIn: true,
+      username: {
+        first: UserStore.getUser().first,
+        last: UserStore.getUser().last
+      }
+    });
   },
+
   render: function() {
     if (!this.state.loggedIn) {
       return (
@@ -53,7 +67,7 @@ var FrontendApp = React.createClass({
 
     return (
       <div className='main'>
-        <Header username='Frank Underwood' />
+        <Header username={this.state.username.first + ' ' + this.state.username.last} />
         <div className='navbar-spaced container'>
           <ReactTransitionGroup transitionName='fade'>
             <RouteHandler />

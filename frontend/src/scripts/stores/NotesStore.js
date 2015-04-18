@@ -22,8 +22,8 @@ var NotesStore = assign({}, EventEmitter.prototype, {
   load: function(token) {
     _loadingStarted = true;
 
-    Api.loadChoreosFor(token, _notes);
-    _notes.then(function() {
+    Api.loadNotes(_notes);
+    _notes.promise.then(function() {
       _loadingStarted = false;
       // Maybe send an action to display we are done
     });

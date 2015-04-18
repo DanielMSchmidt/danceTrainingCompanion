@@ -37,7 +37,7 @@ var ChoreoStore = assign({}, EventEmitter.prototype, {
   load: function() {
     _loadingStarted = true;
 
-    Api.loadChoreosFor('get the real token from that other store', _choreos);
+    Api.loadChoreos(_choreos);
     _choreos.promise.then(function() {
       // Maybe send an action to display we are done
     });

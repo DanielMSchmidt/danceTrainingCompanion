@@ -7,18 +7,21 @@ var DanceTrainingCompanionAppDispatcher = require('../dispatcher/DanceTrainingCo
 var Constants = require('../Constants');
 var Api = require('../Api');
 
-var localStorageKey = 'DanceTrainingCompanionAppUserID';
-var _user = {
-    id: localStorage.getItem(localStorageKey)
-};
-
 var UserStore = assign({}, EventEmitter.prototype, {
   getUserId: function() {
-    return _user.id;
+    var user = Api.getUser();
+
+    return user ? user.id : false;
+  },
+
+  getUser: function() {
+    return Api.getUser() || {};
   },
 
   isLoggedIn: function() {
-    return !!_user.id;
+    var user = Api.getUser();
+
+    return user ? !!user.id : false;
   },
 
   emitLogin: function() {
@@ -26,8 +29,7 @@ var UserStore = assign({}, EventEmitter.prototype, {
   },
 
   load: function(authResponse) {
-    _user.id = authResponse.userID;
-    localStorage.setItem(localStorageKey, _user.id);
+    Api.setUser({id: authResponse.userID});
   },
 
   /**
