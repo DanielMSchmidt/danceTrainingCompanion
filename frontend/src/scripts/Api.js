@@ -1,3 +1,4 @@
+/* global FB */
 'use strict';
 
 var Deferred = require('./helpers/Deferred');
