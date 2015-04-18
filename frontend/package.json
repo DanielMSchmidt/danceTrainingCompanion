@@ -11,6 +11,7 @@
   "mainOutput": "main",
   "dependencies": {
     "bootstrap": "^3.3.4",
+    "classnames": "^1.2.0",
     "es6-promise": "^2.0.1",
     "events": "^1.0.2",
     "flux": "^2.0.1",
@@ -18,8 +19,10 @@
     "normalize.css": "~3.0.3",
     "object-assign": "^2.0.0",
     "react": "0.13.x",
+    "react-bootstrap": "^0.20.3",
     "react-dnd": "^0.9.8",
     "react-router": "^0.13.2",
+    "react-router-bootstrap": "^0.13.0",
     "react-tagsinput": "^1.1.0",
     "reqwest": "^1.1.5"
   },
