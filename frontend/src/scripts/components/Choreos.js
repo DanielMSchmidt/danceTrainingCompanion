@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 var ChoreoStore = require('stores/ChoreoStore');
-var Choreo = require('components/Choreo');
+var ChoreoList = require('components/ChoreoList');
 var AddChoreoButton = require('components/AddChoreoButton');
 
 require('styles/Choreos.sass');
@@ -10,11 +10,11 @@ require('styles/Choreos.sass');
 var Choreos = React.createClass({
   getInitialState: function() {
     return {
-      items: []
+      choreos: []
     };
   },
 
-  componentDidMount: function() {
+  componentWillMount: function() {
     ChoreoStore.addChangeListener(this._onChange);
     this.loadChoreos();
   },
@@ -29,8 +29,7 @@ var Choreos = React.createClass({
 
   loadChoreos: function() {
     ChoreoStore.getChoreos().then((res) => {
-      // TODO: moved to props somehow?
-      this.setState({items: res});
+      this.setState({choreos: res});
     });
   },
 
@@ -38,11 +37,7 @@ var Choreos = React.createClass({
     return (
         <div>
           <AddChoreoButton />
-          <div className="choreoList">
-            {this.state.items.map(function(item){
-              return <Choreo content={item} />;
-            })}
-          </div>
+          <ChoreoList content={this.state.choreos} />
         </div>
       );
   }
