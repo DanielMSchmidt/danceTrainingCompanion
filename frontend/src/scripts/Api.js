@@ -3,6 +3,7 @@
 
 var Deferred = require('./helpers/Deferred');
 var Storage = require('./helpers/LocalStorage');
+var fetch = require('../../bower_components/fetch/fetch');
 
 var API_ENDPOINT = '';
 var userKey = 'User';
