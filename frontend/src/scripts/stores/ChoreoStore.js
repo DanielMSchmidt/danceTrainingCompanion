@@ -2,6 +2,7 @@
 var Deferred = require('../helpers/Deferred');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var _ = require('underscore');
 var DanceTrainingCompanionAppDispatcher = require('../dispatcher/DanceTrainingCompanionAppDispatcher');
 var Constants = require('../Constants');
 var Api = require('../Api');
@@ -16,6 +17,11 @@ var ChoreoStore = assign({}, EventEmitter.prototype, {
     // only add after loading is done
     _choreos.promise.then((oldChoreos) => {
       var newChoreos = oldChoreos;
+      // TODO: let API decide which id it will be (can be undefined for a moment)
+      choreo.id = _.max(oldChoreos, function(item) {
+        return parseInt(item.id, 10);
+      }) + 1;
+
       newChoreos.push(choreo);
       _choreos = new Deferred();
       _choreos.resolve(newChoreos);
@@ -40,6 +46,19 @@ var ChoreoStore = assign({}, EventEmitter.prototype, {
     Api.loadChoreos(_choreos);
     _choreos.promise.then(function() {
       // Maybe send an action to display we are done
+    });
+  },
+
+  update: function(newChoreo) {
+    _choreos.promise.then((oldChoreos) => {
+
+      var newChoreos = _.map(oldChoreos, function(choreo) {
+        return (choreo.id === newChoreo.id) ? newChoreo : choreo;
+      });
+
+      _choreos = new Deferred();
+      _choreos.resolve(newChoreos);
+      this.emitChange();
     });
   },
 

@@ -65,6 +65,7 @@ var Api = {
     // TODO: cache via localstorage and then background sync
 
     promise.resolve([{
+      id: 1,
       name: 'Samba',
       content: []
     }]);
