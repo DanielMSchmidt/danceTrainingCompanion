@@ -33,7 +33,7 @@ var NotesStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 NotesStore.dispatchToken = DanceTrainingCompanionAppDispatcher.register(function(action) {
   switch(action.actionType) {
-    case Constants.LOGGED_IN:
+    case Constants.LOG_IN_COMPLETED:
       NotesStore.load(action.token);
     break;
 

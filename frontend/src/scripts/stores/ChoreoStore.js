@@ -84,7 +84,7 @@ var ChoreoStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 ChoreoStore.dispatchToken = DanceTrainingCompanionAppDispatcher.register(function(action) {
   switch(action.actionType) {
-    case Constants.LOGGED_IN:
+    case Constants.LOG_IN_COMPLETED:
       ChoreoStore.load();
     break;
 

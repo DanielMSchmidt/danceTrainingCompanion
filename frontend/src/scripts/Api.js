@@ -1,11 +1,13 @@
-/* global FB */
+/* global FB, fetch */
 'use strict';
 
 var Deferred = require('./helpers/Deferred');
 var Storage = require('./helpers/LocalStorage');
-var fetch = require('../../bower_components/fetch/fetch');
+var LoginCompletedActionCreators = require('actions/LoginCompletedActionCreators');
 
-var API_ENDPOINT = '';
+require('../../bower_components/fetch/fetch');
+
+var API_ENDPOINT = 'http://127.0.0.1:3000';
 var userKey = 'User';
 var _user = null;
 
@@ -38,8 +40,21 @@ var Api = {
   },
 
   saveUser: function(user) {
-    // TODO: check for other id to load up additional data
-    // TODO: api call?
+    fetch(`${API_ENDPOINT}/user`, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        facebook_id: user.id
+      })
+    }).then(function() {
+      LoginCompletedActionCreators.loginCompleted();
+    }, function() {
+      throw "Server nicht erreichbar";
+    });
+
     _user = user;
     Storage.setObject(userKey, _user);
   },
