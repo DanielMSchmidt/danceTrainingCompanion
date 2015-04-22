@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def getOrCreate
-    @user = User.find_by_facebook_id(params[:facebook_id]) || User.createWithParams(params[:facebook_id])
+    @user = User.find_by_facebook_id(facebookId) || User.createWithFacebookId(facebookId)
 
     if @user
       head(:ok)
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   private
-    def user_params
-      params.require(:facebook_id)
+    def facebookId
+      Integer(params.require(:facebook_id))
     end
 end

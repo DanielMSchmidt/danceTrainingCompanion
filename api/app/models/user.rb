@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
 
-  def self.createWithParams facebook_id
-    user = User.new({facebook_id: facebook_id})
+  validates :facebook_id, presence: true, numericality: { only_integer: true }
 
-    if user.save
+  def self.createWithFacebookId facebook_id
+    user = User.new(facebook_id: facebook_id)
+
+    if user.valid? && user.save
       user
     else
       nil

@@ -18,11 +18,7 @@ gem 'sqlite3'
 # To use Jbuilder templates for JSON
 gem 'jbuilder'
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano', :group => :development
+gem 'rack-cors', :require => 'rack/cors'
 
 # To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+gem 'byebug'
